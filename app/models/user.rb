@@ -2,7 +2,17 @@ class User < ActiveRecord::Base
   include Clearance::User
 
   before_save :ensure_authentication_token
+  has_many :messages
+
   attr_accessor :password_confirmation
+
+  def all_messages
+    if is_free
+      Message.where(user_id: nil)
+    else
+      messages + Message.where(user_id: nil)
+    end
+  end
 
   private
 

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628211432) do
+ActiveRecord::Schema.define(version: 20140628220344) do
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.string   "abuse"
+    t.string   "sensored_abuse"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "user_contacts", force: true do |t|
     t.integer  "user_id"

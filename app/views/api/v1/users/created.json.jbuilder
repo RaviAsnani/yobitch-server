@@ -6,4 +6,12 @@ json.user do
   json.is_elevated @user.is_elevated
   json.gcm_token @user.gcm_token
   json.auth_token @user.auth_token
+  json.message @user.all_messages do |message|
+    json.id message.id
+    if @user.is_elevated 
+      json.abuse message.abuse
+    else
+      json.abuse message.sensored_abuse
+    end 
+  end
 end
