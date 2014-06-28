@@ -14,3 +14,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+/config/deploy.rb
+/config/deploy/*
+Capfile
+.rvmrc
