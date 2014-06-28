@@ -1,0 +1,137 @@
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+	.show-menu, .hide-menu {
+		right: 30px;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+	.top-content .text {
+    	padding-top: 25px;
+    }
+
+    .features p, .single-feature-text p, .whos-behind p, .contact p {
+    	padding: 0;
+    }
+
+}
+
+@media (max-width: 991px) {
+
+	.show-menu {
+		right: 30px;
+	}
+	
+	.hide-menu {
+		position: static;
+		top: auto;
+		right: auto;
+		z-index: auto;
+	}
+	
+	.hide-menu a {
+		height: 42px;
+		padding-top: 0;
+	}
+
+}
+
+@media (max-width: 767px) {
+
+    body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .inner-bg {
+    	padding-bottom: 60px;
+    }
+    
+    .top-content .text {
+    	text-align: center;
+    }
+    
+    .top-content .top-arrow i:before {
+    	left: 33.5px;
+    }
+
+    .top-content h2, .features h3, .single-feature-text h3, .call-to-action-text h3, 
+    .subscribe h3, .testimonials h3, .whos-behind h3, .contact h3 {
+        font-size: 40px;
+        padding: 0 20px;
+    }
+
+    .top-content .description, .features p, .single-feature-text p, .call-to-action-text p, 
+    .subscribe p, .testimonials p, .whos-behind p, .contact p {
+        padding: 0 20px;
+    }
+    
+    .features-box-1 p, .whos-behind-box-1 p, .latest-tweets p, .contact-address p {
+        padding: 0 20px;
+    }
+    
+    .contact-form, .contact-address {
+        text-align: center;
+    }
+    
+    .contact-form {
+        padding-bottom: 40px;
+    }
+    
+    .contact-address {
+        padding-bottom: 65px;
+    }
+    
+    .footer-copyright, .footer-social {
+        text-align: center;
+    }
+    
+    .footer-copyright p {
+        padding: 0 20px;
+    }
+    
+    .footer-social {
+        margin-top: 15px;
+    }
+
+}
+
+@media (max-width: 540px) {
+
+    .subscribe form input {
+        width: 90%;
+    }
+
+    .subscribe form button {
+        width: 90%;
+        margin-top: 10px;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+	.show-menu {
+		right: 10px;
+	}
+
+}
+
+@media (max-width: 345px) {
+
+	.button-2 {
+		height: auto;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	
+	.button-1 {
+		height: auto;
+		padding-bottom: 2px;
+	}
+
+}
+
