@@ -21,3 +21,9 @@ module YobitchServer
     # config.i18n.default_locale = :de
   end
 end
+
+ERROR_UNPROCESSABLE = 422
+ERROR_INTERNAL = 500
+ERROR_UNAUTHORIZED = 401
+ERROR_NOT_FOUND = 404
+ERROR_INVALID_USER_TOKEN = 1000

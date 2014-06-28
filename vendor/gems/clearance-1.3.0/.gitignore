@@ -1,0 +1,11 @@
+!.keep
+*.DS_Store
+*.swo
+*.swp
+*~
+.bundle
+db/*.sqlite3
+gemfiles/
+log/*.log
+pkg
+tmp/
