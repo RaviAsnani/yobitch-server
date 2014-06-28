@@ -25,7 +25,6 @@ class Api::V1::UsersController < ApiBaseController
 
   def sync_contacts
     if params[:user].present? and params[:user][:contacts].present? and params[:user][:contacts].is_a?(Array)
-      # UserContact.where(:email => params[:user][:contacts], :user_id => @user.id).delete_all
       user_contacts = []
       params[:user][:contacts].each do |contact|
         user_contact = UserContact.new
