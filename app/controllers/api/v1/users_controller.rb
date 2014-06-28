@@ -16,6 +16,7 @@ class Api::V1::UsersController < ApiBaseController
   end
 
   def update
+    @user = User.find_by_auth_token(params[:id])
     if @user.update_attributes(user_params)
       render 'created.json.jbuilder'
     else

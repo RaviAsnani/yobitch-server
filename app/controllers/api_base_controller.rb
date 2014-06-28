@@ -17,7 +17,7 @@ class ApiBaseController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by_authentication_token(params[:auth_token])
+    @user = User.find_by_auth_token((params[:auth_token] || params[:id]))
     unless @user
       render json: { error: { code: ERROR_INVALID_USER_TOKEN,  messages: ['User is invalid'] } }, status: :unprocessable_entity
     end
