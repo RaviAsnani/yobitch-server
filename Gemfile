@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.1.1'
 
 gem 'rails', '4.1.2'
 gem 'sass-rails', '~> 4.0.3'
@@ -19,13 +20,4 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 
