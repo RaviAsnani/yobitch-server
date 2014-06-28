@@ -19,3 +19,5 @@
 /config/deploy/*
 Capfile
 .rvmrc
+
+.Gemfile
