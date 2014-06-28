@@ -14,7 +14,7 @@ class CreateUsers < ActiveRecord::Migration
     end
 
     add_index :users, :email
-    add_index :users, :remember_token
+    add_index :users, :auth_token
   end
 
   def self.down

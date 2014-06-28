@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'rails_admin'
 gem 'rails_config'
 gem 'clearance', :path => "vendor/gems/clearance-1.3.0"
+gem 'activerecord-import'
 
 group :doc do 
   gem 'sdoc', '~> 0.4.0'

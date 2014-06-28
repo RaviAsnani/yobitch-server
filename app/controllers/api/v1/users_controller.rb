@@ -16,15 +16,26 @@ class Api::V1::UsersController < ApiBaseController
   end
 
   def update
-    if @user == User.find(params[:id])
-      if @user.update_attributes(user_params)
-        render 'created.json.jbuilder'
-      else
-        render json: { error: { code: ERROR_UNPROCESSABLE, messages: @user.errors.full_messages } }, status: :unprocessable_entity
-      end
+    if @user.update_attributes(user_params)
+      render 'created.json.jbuilder'
     else
-      render json: { error: { code: ERROR_UNAUTHORIZED, messages: ['Unauthorized Access'] } }, status: :unauthorized
+      render json: { error: { code: ERROR_UNPROCESSABLE, messages: @user.errors.full_messages } }, status: :unprocessable_entity
     end
+  end
+
+  def sync_contacts
+    if params[:user].present? and params[:user][:contacts].present? and params[:user][:contacts].is_a?(Array)
+      # UserContact.where(:email => params[:user][:contacts], :user_id => @user.id).delete_all
+      user_contacts = []
+      params[:user][:contacts].each do |contact|
+        user_contact = UserContact.new
+        user_contact.email = contact
+        user_contact.user = @user
+        user_contacts << user_contact
+      end
+      UserContact.import user_contacts
+    end
+    render json: { code: SUCCESS_OK, messages: "Contacts Synced" }, status: :ok
   end
 
   private

@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   namespace :api, :defaults => {:format => 'json'}  do
     namespace :v1 do
-      resources :users, only: [:create, :update]
+      put 'users' => 'users#update'
+      resources :users, only: [:create] do
+        collection do
+          post 'sync_contacts'
+        end
+      end
     end
   end
 
