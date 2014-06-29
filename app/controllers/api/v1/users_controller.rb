@@ -37,6 +37,16 @@ class Api::V1::UsersController < ApiBaseController
     render json: { code: SUCCESS_OK, messages: "Contacts Synced" }, status: :ok
   end
 
+  def send_message
+    user = User.find(params[:receiver_id])
+    message = Message.find(params[:message_id])
+    if user.send_abuse(@user, message)
+      render json: { code: SUCCESS_OK, messages: "Sent Successfully" }, status: :ok
+    else
+      render json: { error: { code: ERROR_UNPROCESSABLE, messages: "Failed to send" } }, status: :unprocessable_entity
+    end
+  end
+
   def add_friend
     friend = nil
     friend = User.find_by_id(params[:id]) if params[:id].present?

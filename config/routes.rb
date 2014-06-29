@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         collection do
           post 'sync_contacts'
           post 'add_friend'
+          post 'send_message'
         end
       end
     end
