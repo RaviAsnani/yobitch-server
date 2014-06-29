@@ -12,7 +12,15 @@ gem 'newrelic_rpm'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'rails_admin'
+gem 'rails_config'
+gem 'clearance', :path => "vendor/gems/clearance-1.3.0"
+gem 'activerecord-import'
+gem 'higcm'
+
+group :doc do 
+  gem 'sdoc', '~> 0.4.0'
+end
 
 group :development do
   gem 'spring'
