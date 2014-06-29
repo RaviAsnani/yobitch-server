@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628220344) do
+ActiveRecord::Schema.define(version: 20140629140232) do
 
   create_table "messages", force: true do |t|
     t.integer  "user_id"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20140628220344) do
 
   add_index "user_contacts", ["user_id", "email"], name: "index_user_contacts_on_user_id_and_email", unique: true, using: :btree
   add_index "user_contacts", ["user_id"], name: "index_user_contacts_on_user_id", using: :btree
+
+  create_table "user_friends", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.datetime "created_at",                                     null: false

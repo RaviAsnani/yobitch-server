@@ -37,6 +37,17 @@ class Api::V1::UsersController < ApiBaseController
     render json: { code: SUCCESS_OK, messages: "Contacts Synced" }, status: :ok
   end
 
+  def add_friend
+    friend = nil
+    friend = User.find_by_id(params[:id]) if params[:id].present?
+    friend = User.find_by_email(params[:email]) if params[:email].present?
+    if friend.present? and @user.add_friend(friend)
+      render json: { code: SUCCESS_OK, messages: "Friend Added" }, status: :ok
+    else
+      render json: { error: { code: ERROR_UNPROCESSABLE, messages: "Failed to add friend" } }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params

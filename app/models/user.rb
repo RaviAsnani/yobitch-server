@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
   has_many :messages
+  
+  has_many :user_friends
+  has_many :friends, :through => :user_friends
 
   attr_accessor :password_confirmation
 
@@ -12,6 +15,27 @@ class User < ActiveRecord::Base
     else
       messages + Message.where(user_id: nil)
     end
+  end
+
+  def add_friend_by_email(email)
+    user = User.find_by_email(email)
+    if user.present?
+      add_friend(user)      
+    else
+      false
+    end
+  end
+
+  def add_friend(friend)
+    user_friend = UserFriend.new
+    user_friend.user_id = self.id
+    user_friend.friend_id = friend.id
+    user_friend.save
+    user_friend = UserFriend.new
+    user_friend.user_id = friend.id
+    user_friend.friend_id = self.id
+    user_friend.save
+    true
   end
 
   private
