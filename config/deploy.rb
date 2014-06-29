@@ -23,7 +23,7 @@ set :repo_url, 'git@github.com:RaviAsnani/yobitch-server.git'
 set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/settings.yml config/settings/production.yml}
+set :linked_files, %w{config/database.yml config/settings/production.yml}
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle config/settings public/assets}
