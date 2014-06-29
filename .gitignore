@@ -15,9 +15,7 @@
 /log/*.log
 /tmp
 
-/config/deploy.rb
-/config/deploy/*
-Capfile
+/config/deploy/production.rb
 .rvmrc
 
 .Gemfile
