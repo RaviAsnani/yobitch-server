@@ -17,7 +17,7 @@ set :repo_url, 'git@github.com:RaviAsnani/yobitch-server.git'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :info
 
 # Default value for :pty is false
 set :pty, true
@@ -26,7 +26,7 @@ set :pty, true
 set :linked_files, %w{config/database.yml config/settings/production.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle config/settings public/assets}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle config/settings}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -39,7 +39,6 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
       execute :touch, release_path.join('tmp/restart.txt')
     end
   end
@@ -54,5 +53,7 @@ namespace :deploy do
       # end
     end
   end
+
+  after "deploy:updated", "newrelic:notice_deployment"
 
 end
