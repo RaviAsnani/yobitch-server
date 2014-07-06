@@ -14,4 +14,5 @@ json.user do
       json.abuse message.sensored_abuse
     end 
   end
+  json.friends @user.friends
 end
