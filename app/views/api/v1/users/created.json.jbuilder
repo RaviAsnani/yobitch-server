@@ -14,5 +14,5 @@ json.user do
       json.abuse message.sensored_abuse
     end 
   end
-  json.friends @user.friends
+  json.friends @user.friends.as_json(only: [:id, :email, :name])
 end
