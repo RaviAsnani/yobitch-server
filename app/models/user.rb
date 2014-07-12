@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
       else
         data[:message] = message.sensored_abuse
       end
-      send_message(data)
+      send_message({:data => data})
     else
       false
     end
