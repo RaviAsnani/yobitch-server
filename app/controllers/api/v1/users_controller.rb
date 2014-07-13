@@ -46,7 +46,7 @@ class Api::V1::UsersController < ApiBaseController
   end
 
   def send_message
-    if params[:receiver_id] == "0"
+    if params[:receiver_id] == 0
       params[:receiver_id] = @user.id
       params[:message_id] = Message.random.id
       @user = User.find(0)
