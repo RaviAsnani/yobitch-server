@@ -52,10 +52,14 @@ class Api::V1::UsersController < ApiBaseController
     friend = User.find_by_id(params[:id]) if params[:id].present?
     friend = User.find_by_email(params[:email]) if params[:email].present?
     if friend.present? and @user.add_friend(friend)
-      render json: { code: SUCCESS_OK, messages: "Friend Added" }, status: :ok
+      render 'created.json.jbuilder'
     else
       render json: { error: { code: ERROR_UNPROCESSABLE, messages: "Failed to add friend" } }, status: :unprocessable_entity
     end
+  end
+
+  def invite
+    redirect_to "https://play.google.com/store/apps/details?id=com.threed.bowling&referrer=#{param[:id]}"
   end
 
   private
