@@ -700,3 +700,19 @@ footer {
 	text-align: right;
 }
 
+#nexus-carousel-container {
+  background-image: url("../images/yo-nexus-frame.png");
+  background-repeat: no-repeat;
+  padding: 76px;
+  padding-left: 76px;
+  padding-top: 108px;
+  margin-bottom: 50px;
+}
+
+#nexus-carousel {
+  width: 271px;
+}
+
+.carousel-control, .carousel-control:hover, .carousel-control:focus {
+  background: none !important;
+}

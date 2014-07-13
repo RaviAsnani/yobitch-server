@@ -23,8 +23,9 @@
 		<link rel="stylesheet" href="assets/ultimate-flat-social-icons/ultm-css/ultm-effects.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/media-queries.css">
-
-
+        <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+        
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="assets/ico/favicon.png">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
@@ -41,7 +42,36 @@
                 <div class="container">
                     <div class="row">
                     	<div class="col-sm-5 phone">
-                        	<img src="assets/images/yo-nexus.png" alt="">
+                        	<!-- <img src="assets/images/yo-nexus-frame.png" alt=""> -->
+                            <div id="nexus-carousel-container">
+                                <div id="nexus-carousel" class="carousel slide" data-ride="carousel">
+                                  <!-- Indicators -->
+                                  <ol class="carousel-indicators">
+                                    <li data-target="#nexus-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#nexus-carousel" data-slide-to="1"></li>
+                                    <li data-target="#nexus-carousel" data-slide-to="2"></li>
+                                  </ol>
+                                  <div class="carousel-inner">
+                                    <div class="item active">
+                                      <img src="assets/images/screen_1.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                      <img src="assets/images/screen_1.jpg" alt="">
+                                    </div>
+                                    <div class="item">
+                                      <img src="assets/images/screen_1.jpg" alt="">
+                                    </div>
+                                  </div>
+                                  <a class="left carousel-control" href="#nexus-carousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                  </a>
+                                  <a class="right carousel-control" href="#nexus-carousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                  </a>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="col-sm-7 text" style="margin-top:140px;">
                             <h2>Yo! B*tch</h2>
