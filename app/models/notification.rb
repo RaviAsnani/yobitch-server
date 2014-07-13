@@ -41,13 +41,8 @@ class Notification < ActiveRecord::Base
           logger.info "[Error Send Message] #{response} #{data}"
           false
         else
-          logger.info self.inspect
           self.sent = true
-          if self.save
-            logger.info "saved"
-          else
-            logger.info self.error
-          end
+          self.save
           logger.info "[Success Send Message] #{response} #{data}"
           true
         end
