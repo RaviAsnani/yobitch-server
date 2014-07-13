@@ -3,11 +3,19 @@ class Api::V1::UsersController < ApiBaseController
 
   def create
     @user = User.find_by_email(user_params[:email]) 
+    new_user = false
     unless @user.present?
       @user = User.new(user_params)
       @user.password = "yobitch"
+      new_user = true
     end
     if @user.save
+      if new_user
+        friend = User.find_by_id(0)
+        if friend.present?
+          @user.add_friend(friend)
+        end
+      end
       sign_in @user
       render 'created.json.jbuilder'
     else
@@ -38,6 +46,11 @@ class Api::V1::UsersController < ApiBaseController
   end
 
   def send_message
+    if params[:receiver_id] == "0"
+      params[:receiver_id] = @user.id
+      params[:message_id] = Message.random.id
+      @user = User.find(0)
+    end
     user = User.find(params[:receiver_id])
     message = Message.find(params[:message_id])
     if user.send_abuse(@user, message)
