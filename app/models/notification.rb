@@ -23,7 +23,7 @@ class Notification < ActiveRecord::Base
     else
       data[:message] = self.message.sensored_abuse
     end
-    send_message({:data => data}, self.receiver.gcm_token)
+    self.send_message({:data => data}, self.receiver.gcm_token)
   end
 
   private
@@ -41,8 +41,12 @@ class Notification < ActiveRecord::Base
           logger.info "[Error Send Message] #{response} #{data}"
           false
         else
-          sent = true
-          save
+          self.sent = true
+          if self.save
+            logger.info "saved"
+          else
+            logger.info self.error
+          end
           logger.info "[Success Send Message] #{response} #{data}"
           true
         end
