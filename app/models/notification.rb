@@ -28,7 +28,7 @@ class Notification < ActiveRecord::Base
 
   private
 
-  def self.send_message(data, gcm_token)
+  def send_message(data, gcm_token)
     if gcm_token.present?
       options = { 
         :data => data 
@@ -41,6 +41,8 @@ class Notification < ActiveRecord::Base
           logger.info "[Error Send Message] #{response} #{data}"
           false
         else
+          sent = true
+          save
           logger.info "[Success Send Message] #{response} #{data}"
           true
         end
