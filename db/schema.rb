@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713054514) do
+ActiveRecord::Schema.define(version: 20140722181033) do
 
   create_table "messages", force: true do |t|
     t.integer  "user_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140713054514) do
     t.boolean  "sent",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
   end
 
   add_index "notifications", ["message_id"], name: "index_notifications_on_message_id", using: :btree

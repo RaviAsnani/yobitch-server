@@ -3,6 +3,8 @@ class Notification < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
 
+  self.inheritance_column = "something_else"
+
   def send_abuse
     data = {
       :sender => {
@@ -16,13 +18,35 @@ class Notification < ActiveRecord::Base
         :email => self.receiver.email
       },
       :message => nil,
-      :title => "#{self.sender.name} abused you!" 
+      :title => "#{self.sender.name} abused you!",
+      :klass => self.type,
+      :id => self.id
     }
     if sender.is_elevated
       data[:message] = self.message.abuse
     else
       data[:message] = self.message.sensored_abuse
     end
+    send_message({:data => data}, self.receiver.gcm_token)
+  end
+
+  def friend_joined
+    data = {
+      :sender => {
+        :id => self.sender.id,
+        :name => self.sender.name,
+        :email => self.sender.email
+      },
+      :receiver => {
+        :id => self.receiver.id,
+        :name => self.receiver.name,
+        :email => self.receiver.email
+      },
+      :message => "#{self.sender.name} added you as a friend",
+      :title => "Let the B*tching begin!",
+      :klass => self.type,
+      :id => self.id
+    }
     send_message({:data => data}, self.receiver.gcm_token)
   end
 

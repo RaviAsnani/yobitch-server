@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :user_friends
   has_many :friends, :through => :user_friends
 
+  after_create :notify_friends
+
   attr_accessor :password_confirmation
 
   def all_messages
@@ -36,8 +38,13 @@ class User < ActiveRecord::Base
       notification.sender = sender
       notification.receiver = self
       notification.message = message
+      notification.type = "bitch"
       if notification.save
-        notification.send_abuse
+        if notification.receiver.id == 0
+          sender.send_abuse(receiver, Message.random.id)
+        else
+          notification.send_abuse  
+        end
       else
         false
       end
@@ -55,6 +62,13 @@ class User < ActiveRecord::Base
     user_friend.user_id = friend.id
     user_friend.friend_id = self.id
     user_friend.save
+    notification = Notification.new
+    notification.sender = self
+    notification.receiver = friend
+    notification.type = "friend_add"
+    if notification.save
+      notification.friend_joined
+    end
     true
   end
 
@@ -65,6 +79,13 @@ class User < ActiveRecord::Base
       begin
         self.auth_token = SecureRandom.hex
       end while self.class.exists?(auth_token: auth_token)
+    end
+  end
+
+  def notify_friends
+    friend_ids = UserContact.select(:user_id).where(:email => self.email).collect(&:user_id)
+    User.where(:id => friend_ids).each do |user|
+      self.add_friend(user)
     end
   end
 

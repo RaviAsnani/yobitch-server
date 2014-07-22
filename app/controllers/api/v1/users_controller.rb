@@ -46,11 +46,6 @@ class Api::V1::UsersController < ApiBaseController
   end
 
   def send_message
-    if params[:receiver_id] == 0
-      params[:receiver_id] = @user.id
-      params[:message_id] = Message.random.id
-      @user = User.find(0)
-    end
     user = User.find(params[:receiver_id])
     message = Message.find(params[:message_id])
     if user.send_abuse(@user, message)
