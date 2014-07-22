@@ -42,7 +42,7 @@ class Notification < ActiveRecord::Base
         :name => self.receiver.name,
         :email => self.receiver.email
       },
-      :message => "#{self.sender.name} added you as a friend",
+      :message => "#{self.sender.name} is online",
       :title => "Let the B*tching begin!",
       :klass => self.type,
       :id => self.id

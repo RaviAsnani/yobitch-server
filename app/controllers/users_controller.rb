@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     }
     data = data.to_json
     data = URI.encode(data)
-    redirect_to "https://play.google.com/store/apps/details?id=com.threed.bowling&referrer=#{data}"
+    redirect_to "https://play.google.com/store/apps/details?id=com.rum.yobitch&referrer=#{data}"
   end
 
 end
