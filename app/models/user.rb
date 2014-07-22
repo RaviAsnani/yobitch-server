@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
       notification.type = "bitch"
       if notification.save
         if notification.receiver.id == 0
-          sender.send_abuse(receiver, Message.random.id)
+          sender.send_abuse(self, Message.random.id)
         else
           notification.send_abuse  
         end
