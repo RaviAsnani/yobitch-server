@@ -17,6 +17,8 @@ gem 'rails_config'
 gem 'clearance', :path => "vendor/gems/clearance-1.3.0"
 gem 'activerecord-import'
 gem 'higcm'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :doc do 
   gem 'sdoc', '~> 0.4.0'
