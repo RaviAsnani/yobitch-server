@@ -34,8 +34,6 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle config/set
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :delayed_job_command, "bin/delayed_job"
-
 namespace :deploy do
 
   desc 'Restart application'
@@ -48,15 +46,11 @@ namespace :deploy do
   after :publishing, :restart
 
   after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+    on roles(:worker) do
+      execute "cd #{current_path}; RAILS_ENV=production bin/delayed_job restart"
     end
   end
 
-  after "deploy:restart", "delayed_job:stop","delayed_job:start"
   after "deploy:updated", "newrelic:notice_deployment"
 
 end

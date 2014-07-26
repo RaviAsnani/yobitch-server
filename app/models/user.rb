@@ -41,9 +41,9 @@ class User < ActiveRecord::Base
       notification.type = "bitch"
       if notification.save
         if notification.receiver.id == 0
-          sender.send_abuse(self, Message.random)
+          sender.delay(run_at: [5,6,7,8,9,10].sample.seconds.from_now).send_abuse(self, Message.random)
         else
-          notification.send_abuse  
+          notification.delay.send_abuse  
         end
       else
         false
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
     notification.receiver = friend
     notification.type = "friend_add"
     if notification.save
-      notification.friend_joined
+      notification.delay.friend_joined
     end
     true
   end
