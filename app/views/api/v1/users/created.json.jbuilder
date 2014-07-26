@@ -14,3 +14,4 @@ json.messages @user.all_messages do |message|
   end 
 end
 json.friends @user.friends.as_json(only: [:id, :email, :name])
+json.should_sync !@user.contact_sync

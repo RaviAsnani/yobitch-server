@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722181033) do
+ActiveRecord::Schema.define(version: 20140726091713) do
 
   create_table "messages", force: true do |t|
     t.integer  "user_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140722181033) do
     t.string   "encrypted_password", limit: 128,                 null: false
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128,                 null: false
+    t.boolean  "contact_sync",                   default: false
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", using: :btree

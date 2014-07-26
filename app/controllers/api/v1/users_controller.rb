@@ -41,6 +41,8 @@ class Api::V1::UsersController < ApiBaseController
         user_contacts << user_contact
       end
       UserContact.import user_contacts
+      @user.contact_sync = true
+      @user.save
     end
     render json: { code: SUCCESS_OK, messages: "Contacts Synced" }, status: :ok
   end
