@@ -52,22 +52,26 @@ class User < ActiveRecord::Base
   end
 
   def add_friend(friend)
-    user_friend = UserFriend.new
-    user_friend.user_id = self.id
-    user_friend.friend_id = friend.id
-    user_friend.save
-    user_friend = UserFriend.new
-    user_friend.user_id = friend.id
-    user_friend.friend_id = self.id
-    user_friend.save
-    notification = Notification.new
-    notification.sender = self
-    notification.receiver = friend
-    notification.type = "friend_add"
-    if notification.save
-      notification.delay.friend_joined
+    unless self.is_friends?(friend)
+      user_friend = UserFriend.new
+      user_friend.user_id = self.id
+      user_friend.friend_id = friend.id
+      user_friend.save
+      user_friend = UserFriend.new
+      user_friend.user_id = friend.id
+      user_friend.friend_id = self.id
+      user_friend.save
+      notification = Notification.new
+      notification.sender = self
+      notification.receiver = friend
+      notification.type = "friend_add"
+      if notification.save
+        notification.delay.friend_joined
+      end
+      true
+    else
+      true
     end
-    true
   end
 
   def notify_friends

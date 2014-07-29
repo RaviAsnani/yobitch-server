@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   end
 
   get ':id/:name' => 'users#invite'
+  get 'i/:id/:name' => 'users#invite'
 
 end
