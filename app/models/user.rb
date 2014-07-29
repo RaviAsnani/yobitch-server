@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
   has_many :user_friends
   has_many :friends, :through => :user_friends
 
-  after_create :notify_friends
-
   attr_accessor :password_confirmation
 
   def all_messages
@@ -72,6 +70,17 @@ class User < ActiveRecord::Base
     true
   end
 
+  def notify_friends
+    friend_ids = UserContact.select(:user_id).where(:email => self.email).collect(&:user_id)
+    contacts = UserContact.select(:email).where(:user_id => self.id).collect(&:email)
+    users = User.where("id IN (?) OR email IN (?)", friend_ids, contacts)
+    users.each do |user|
+      unless self.is_friends?(user)
+        self.add_friend(user)
+      end
+    end
+  end
+
   private
 
   def ensure_authentication_token
@@ -79,13 +88,6 @@ class User < ActiveRecord::Base
       begin
         self.auth_token = SecureRandom.hex
       end while self.class.exists?(auth_token: auth_token)
-    end
-  end
-
-  def notify_friends
-    friend_ids = UserContact.select(:user_id).where(:email => self.email).collect(&:user_id)
-    User.where(:id => friend_ids).each do |user|
-      self.add_friend(user)
     end
   end
 

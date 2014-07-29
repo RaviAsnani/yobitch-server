@@ -16,6 +16,7 @@ class Api::V1::UsersController < ApiBaseController
           @user.add_friend(friend)
         end
       end
+      @user.delay.notify_friends
       sign_in @user
       render 'created.json.jbuilder'
     else
@@ -43,6 +44,7 @@ class Api::V1::UsersController < ApiBaseController
       UserContact.import user_contacts
       @user.contact_sync = true
       @user.save
+      @user.delay.notify_friends
     end
     render json: { code: SUCCESS_OK, messages: "Contacts Synced" }, status: :ok
   end
