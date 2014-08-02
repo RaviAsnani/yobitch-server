@@ -36,6 +36,18 @@ class Api::V1::UsersController < ApiBaseController
     end
   end
 
+  def add_message
+    message = Message.new(message_params)
+    message.sensored_abuse = message.abuse
+    message.user = @user
+    if message.save
+      @user.reload
+      render 'created.json.jbuilder'
+    else
+      render json: { error: { code: ERROR_UNPROCESSABLE, messages: message.errors.full_messages } }, status: :unprocessable_entity  
+    end
+  end
+
   def sync_contacts
     if params[:user].present? and params[:user][:contacts].present? and params[:user][:contacts].is_a?(Array)
       user_contacts = []
@@ -78,6 +90,10 @@ class Api::V1::UsersController < ApiBaseController
 
   def user_params
     params.fetch(:user).permit(:name, :email, :gcm_token)
+  end
+
+  def message_params
+    params.fetch(:message).permit(:abuse)
   end
 
 end

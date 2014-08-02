@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
 
   def all_messages
-    if is_free
-      Message.where(user_id: nil)
-    else
+    # if is_free
+    #   Message.where(user_id: nil)
+    # else
       messages + Message.where(user_id: nil)
-    end
+    # end
   end
 
   def add_friend_by_email(email)

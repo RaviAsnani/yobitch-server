@@ -1,0 +1,12 @@
+user = User.find(35)
+
+payload = {
+  :data => {
+    :object_id => 1, 
+    :type => 'event_added', 
+    :user_id => 2  
+  }
+}
+
+request = HiGCM::Sender.new(ENV['GCM_API_KEY'])
+request.send([user.gcm_token], payload)
