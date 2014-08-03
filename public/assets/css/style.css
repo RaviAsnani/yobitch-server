@@ -93,6 +93,7 @@ nav a:focus { color: #fff; }
 
 .top-content .phone {
 	text-align: center;
+  padding: 0;
 }
 
 .top-content .text {
@@ -703,9 +704,8 @@ footer {
 #nexus-carousel-container {
   background-image: url("../images/yo-nexus-frame.png");
   background-repeat: no-repeat;
-  padding: 76px;
-  padding-left: 76px;
-  padding-top: 108px;
+  background-position: -49px 0;
+  padding: 108px 0 76px 27px;
   margin-bottom: 50px;
 }
 
