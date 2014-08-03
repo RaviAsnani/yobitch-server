@@ -18,7 +18,7 @@ class Notification < ActiveRecord::Base
         :email => self.receiver.email
       },
       :message => nil,
-      :title => "#{self.sender.name} abused you!",
+      :title => "#{self.sender.name} bitched at you!",
       :klass => self.type,
       :id => self.id
     }

@@ -13,6 +13,7 @@ class Api::V1::UsersController < ApiBaseController
       if new_user
         friend = User.find_by_id(0)
         @user.add_friend(friend) if friend.present?
+        SystemMailer.delay(run_at: 3.minutes.from_now).welcome(@user)
       end
       if params[:add_friends].present?
         friends = User.where(id: params[:add_friends])
